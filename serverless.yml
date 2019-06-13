@@ -1,0 +1,25 @@
+service: <your-service>
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  stage: ${opt:stage, 'dev'}
+  region: <your-region>
+  deploymentBucket:
+    name: <your-bucket>
+
+functions:
+  graphql:
+    handler: index.graphqlHandler
+    events:
+      - http:
+          path: graphql
+          method: get
+          corst: true
+      - http:
+          path: graphql
+          method: post
+          corst: true
+
+plugins:
+  - serverless-offline
